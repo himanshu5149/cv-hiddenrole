@@ -1,0 +1,26 @@
+{
+  "name": "hiddenrole",
+  "version": "1.0.0",
+  "description": "HiddenRole: evidence-based opportunity discovery. No external API keys.",
+  "main": "bin/start.js",
+  "scripts": {
+    "start": "node bin/start.js",
+    "test": "node --test test/*.test.js",
+    "ingest": "node -e \"const {open}=require('./src/db');const {runIngest}=require('./src/ingest');const db=open(process.env.DB_PATH||'data/hiddenrole.db');runIngest(db,require('./companies.json')).then(r=>console.log(r))\"",
+    "import": "node scripts/import.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.3.0",
+    "mammoth": "^1.13.0",
+    "multer": "^2.4.0",
+    "unpdf": "^1.8.1"
+  },
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  }
+}

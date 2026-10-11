@@ -1,0 +1,13 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {analyze,parseCV,evalOpp}=require('../src/engine');
+const opp=(o)=>({id:1,type:'job',title:'Role',org:'X',url:'https://x.io',source:'t',status:'open',required:[],min_deg:0,min_years:0,country_scope:[],...o});
+test('1-year candidate is NOT eligible for 5-year role even with full skill match',()=>{const p=parseCV('Python SQL Excel dashboard 1 year experience');
+const e=evalOpp(opp({required:['python','sql','excel'],min_years:5}),p);assert.equal(e.cov,1);assert.equal(e.status,'not_eligible');assert.equal(e.hard,true)});
+test('missing info is a warning, never a pass',()=>{const p=parseCV('Python developer who loves APIs and Git');const e=evalOpp(opp({required:['python'],min_years:3,min_deg:3}),p);assert.notEqual(e.status,'strong');assert.ok(e.rows.filter(r=>r.state==='warn').length>=2)});
+test('degree in progress is a warning',()=>{const p=parseCV('BCA student currently pursuing. JavaScript React');const e=evalOpp(opp({required:['js'],min_deg:3}),p);assert.ok(e.rows.some(r=>r.label.startsWith('Degree')&&r.state==='warn'))});
+test('country scope hard-fails when country not listed',()=>{const p=parseCV('Python Git');assert.equal(evalOpp(opp({required:['python'],country_scope:['Kenya']}),p,{country:'Nepal'}).status,'not_eligible');assert.equal(evalOpp(opp({required:['python'],country_scope:['Nepal']}),p,{country:'nepal'}).hard,false)});
+test('web-dev CV finds dev roles and programs',()=>{const r=analyze('Built apps with JavaScript, React, HTML, CSS, Node.js, MySQL, REST APIs, Git and GitHub. Bachelor degree.',{},[opp({id:2,type:'program',title:'GSoC',required:['git',['js','python'],'api']})]);
+assert.ok(r.roles.some(x=>/Frontend|Full-Stack/.test(x.title)));assert.equal(r.matches[0].match,'strong')});
+test('nurse CV finds healthcare roles, not tech',()=>{const r=analyze('Nurse with 8 years of patient care, clinical teaching and strong communication',{},[]);assert.ok(r.roles.some(x=>x.title==='Healthcare Assistant'));assert.ok(!r.roles.some(x=>/Developer/.test(x.title)))});
+test('closed opportunities never appear',()=>{const r=analyze('Python Git APIs',{},[opp({status:'closed',required:['python']})]);assert.equal(r.matches.length,0)});
+test('hidden flag compares to what user searches today',()=>{const r=analyze('Python SQL Excel dashboards statistics research writing',{query:'data analyst'},[]);assert.ok(r.roles.some(x=>x.hidden))});

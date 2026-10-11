@@ -1,0 +1,414 @@
+[
+ {
+  "key": "prog:chevening",
+  "type": "scholarship",
+  "title": "Chevening Scholarships (UK)",
+  "org": "UK Government",
+  "url": "https://www.chevening.org",
+  "description": "Fully funded master's study in the UK for future leaders.",
+  "min_deg": 3,
+  "min_years": 2,
+  "required": [
+   "pm",
+   "comm",
+   "writing"
+  ]
+ },
+ {
+  "key": "prog:commonwealth",
+  "type": "scholarship",
+  "title": "Commonwealth Scholarships (UK)",
+  "org": "Commonwealth Scholarship Commission",
+  "url": "https://cscuk.fcdo.gov.uk",
+  "description": "Funded UK study for students from Commonwealth countries.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "writing"
+  ]
+ },
+ {
+  "key": "prog:daad",
+  "type": "scholarship",
+  "title": "DAAD Scholarships (Germany)",
+  "org": "DAAD",
+  "url": "https://www.daad.de",
+  "description": "Scholarships for study and research in Germany.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "writing"
+  ]
+ },
+ {
+  "key": "prog:erasmus",
+  "type": "scholarship",
+  "title": "Erasmus Mundus Joint Masters",
+  "org": "European Commission",
+  "url": "https://erasmus-plus.ec.europa.eu",
+  "description": "Funded joint master's programmes across European universities.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "writing",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:gsoc",
+  "type": "program",
+  "title": "Google Summer of Code",
+  "org": "Google",
+  "url": "https://summerofcode.withgoogle.com",
+  "description": "Paid open-source contribution programme with mentors.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git",
+   [
+    "js",
+    "python",
+    "node"
+   ],
+   "api"
+  ]
+ },
+ {
+  "key": "prog:outreachy",
+  "type": "internship",
+  "title": "Outreachy Internships",
+  "org": "Outreachy",
+  "url": "https://www.outreachy.org",
+  "description": "Paid remote internships in open source and open science.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git",
+   [
+    "python",
+    "js",
+    "writing",
+    "design"
+   ]
+  ]
+ },
+ {
+  "key": "prog:mlh",
+  "type": "fellowship",
+  "title": "MLH Fellowship",
+  "org": "Major League Hacking",
+  "url": "https://fellowship.mlh.io",
+  "description": "Remote programme building software projects with mentors.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git",
+   [
+    "js",
+    "python"
+   ],
+   "api"
+  ]
+ },
+ {
+  "key": "prog:seasondocs",
+  "type": "program",
+  "title": "Google Season of Docs",
+  "org": "Google",
+  "url": "https://developers.google.com/season-of-docs",
+  "description": "Technical writers work with open-source projects.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "writing",
+   [
+    "git",
+    "api",
+    "html"
+   ]
+  ]
+ },
+ {
+  "key": "prog:startupschool",
+  "type": "program",
+  "title": "Startup School",
+  "org": "Y Combinator",
+  "url": "https://www.startupschool.org",
+  "description": "Free online programme for early-stage founders.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   [
+    "react",
+    "python",
+    "node"
+   ],
+   [
+    "sales",
+    "seo",
+    "pm"
+   ]
+  ]
+ },
+ {
+  "key": "prog:gates",
+  "type": "scholarship",
+  "title": "Gates Cambridge Scholarship",
+  "org": "University of Cambridge",
+  "url": "https://www.gatescambridge.org",
+  "description": "Fully funded postgraduate study at Cambridge for applicants from outside the UK.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "comm",
+   "pm"
+  ]
+ },
+ {
+  "key": "prog:rhodes",
+  "type": "scholarship",
+  "title": "Rhodes Scholarship",
+  "org": "Rhodes Trust",
+  "url": "https://www.rhodeshouse.ox.ac.uk",
+  "description": "Postgraduate study at Oxford for leaders with strong academics.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "pm",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:fulbright",
+  "type": "scholarship",
+  "title": "Fulbright Foreign Student Program",
+  "org": "U.S. Department of State",
+  "url": "https://eca.state.gov/fulbright",
+  "description": "Study and research in the United States.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:agakhan",
+  "type": "scholarship",
+  "title": "Aga Khan Foundation International Scholarship",
+  "org": "Aga Khan Foundation",
+  "url": "https://www.akdn.org",
+  "description": "Postgraduate study support for students from selected developing countries.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "pm"
+  ]
+ },
+ {
+  "key": "prog:swiss",
+  "type": "scholarship",
+  "title": "Swiss Government Excellence Scholarships",
+  "org": "Swiss Confederation",
+  "url": "https://www.sbfi.admin.ch/scholarships",
+  "description": "Research and postgraduate study in Switzerland.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research"
+  ]
+ },
+ {
+  "key": "prog:mext",
+  "type": "scholarship",
+  "title": "Japanese Government (MEXT) Scholarships",
+  "org": "Government of Japan",
+  "url": "https://www.studyinjapan.go.jp",
+  "description": "Funded study in Japan at undergraduate, master's and doctoral level.",
+  "min_deg": 2,
+  "min_years": 0,
+  "required": [
+   "research"
+  ]
+ },
+ {
+  "key": "prog:gks",
+  "type": "scholarship",
+  "title": "Global Korea Scholarship",
+  "org": "Government of Korea",
+  "url": "https://www.studyinkorea.go.kr",
+  "description": "Funded study in Korea.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:turkiye",
+  "type": "scholarship",
+  "title": "Türkiye Scholarships",
+  "org": "Government of Türkiye",
+  "url": "https://turkiyeburslari.gov.tr",
+  "description": "Funded study in Türkiye at all levels.",
+  "min_deg": 2,
+  "min_years": 0,
+  "required": [
+   "research"
+  ]
+ },
+ {
+  "key": "prog:csc",
+  "type": "scholarship",
+  "title": "Chinese Government Scholarship (CSC)",
+  "org": "China Scholarship Council",
+  "url": "https://www.campuschina.org",
+  "description": "Funded study in China.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research"
+  ]
+ },
+ {
+  "key": "prog:ausawards",
+  "type": "scholarship",
+  "title": "Australia Awards Scholarships",
+  "org": "Australian Government",
+  "url": "https://www.dfat.gov.au/people-to-people/australia-awards",
+  "description": "Funded study in Australia for people from eligible developing countries.",
+  "min_deg": 3,
+  "min_years": 2,
+  "required": [
+   "pm",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:hungaricum",
+  "type": "scholarship",
+  "title": "Stipendium Hungaricum",
+  "org": "Tempus Public Foundation",
+  "url": "https://stipendiumhungaricum.hu",
+  "description": "Funded study in Hungary.",
+  "min_deg": 3,
+  "min_years": 0,
+  "required": [
+   "research"
+  ]
+ },
+ {
+  "key": "prog:mastercard",
+  "type": "scholarship",
+  "title": "Mastercard Foundation Scholars Program",
+  "org": "Mastercard Foundation",
+  "url": "https://mastercardfdn.org",
+  "description": "Scholarships and leadership support, focused on Africa.",
+  "min_deg": 2,
+  "min_years": 0,
+  "required": [
+   "pm",
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:lfx",
+  "type": "program",
+  "title": "LFX Mentorship",
+  "org": "Linux Foundation",
+  "url": "https://lfx.linuxfoundation.org/tools/mentorship",
+  "description": "Paid mentorship contributing to open-source projects.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git",
+   [
+    "js",
+    "python",
+    "node",
+    "devops"
+   ]
+  ]
+ },
+ {
+  "key": "prog:hacktoberfest",
+  "type": "program",
+  "title": "Hacktoberfest",
+  "org": "DigitalOcean",
+  "url": "https://hacktoberfest.com",
+  "description": "Annual October open-source contribution event.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git"
+  ]
+ },
+ {
+  "key": "prog:msa",
+  "type": "program",
+  "title": "Microsoft Learn Student Ambassadors",
+  "org": "Microsoft",
+  "url": "https://studentambassadors.microsoft.com",
+  "description": "Student community program for tech leaders and learners.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   [
+    "js",
+    "python",
+    "node",
+    "react",
+    "ml"
+   ],
+   "comm"
+  ]
+ },
+ {
+  "key": "prog:githubpack",
+  "type": "program",
+  "title": "GitHub Student Developer Pack",
+  "org": "GitHub",
+  "url": "https://education.github.com/pack",
+  "description": "Free developer tools for verified students.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "git"
+  ]
+ },
+ {
+  "key": "prog:unv",
+  "type": "program",
+  "title": "United Nations Volunteers",
+  "org": "UNV",
+  "url": "https://www.unv.org",
+  "description": "Volunteer assignments with UN agencies.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "comm",
+   "pm"
+  ]
+ },
+ {
+  "key": "prog:aiesec",
+  "type": "internship",
+  "title": "AIESEC Global Volunteer and Talent",
+  "org": "AIESEC",
+  "url": "https://aiesec.org",
+  "description": "Youth-led international internships and volunteering.",
+  "min_deg": 0,
+  "min_years": 0,
+  "required": [
+   "comm",
+   "pm"
+  ]
+ }
+]

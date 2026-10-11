@@ -1,0 +1,12 @@
+services:
+  hiddenrole:
+    build: .
+    ports: ["3000:3000"]
+    volumes: ["hr-data:/data"]
+    environment:
+      ADMIN_EMAIL: you@example.com
+      INGEST_ENABLED: "1"
+      COOKIE_SECURE: "0"   # set to 1 behind HTTPS
+      TRUST_PROXY: "1"
+    restart: unless-stopped
+volumes: {hr-data: {}}
