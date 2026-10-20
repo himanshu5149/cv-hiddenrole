@@ -1,1 +1,9 @@
-{"greenhouse":[],"lever":[],"remotive":true}
+{
+  "greenhouse": ["gitlab","stripe","airbnb","cloudflare","datadog","figma","coinbase","dropbox","reddit","pinterest","discord","twilio","robinhood","mongodb","elastic","asana","lyft","doordash","okta","vercel","webflow","instacart"],
+  "lever": ["spotify","palantir"],
+  "remotive": true,
+  "remoteok": true,
+  "arbeitnow": true,
+  "jobicy": true,
+  "weworkremotely": true
+}
