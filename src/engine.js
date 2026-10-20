@@ -51,11 +51,15 @@ function roleScan(p){return ROLES.map(([t,w])=>{let tot=0,got=0;const hit=[],mis
 const NEXT={testing:'Write tests for one of your projects',design:'Redesign one app screen in Figma',excel:'Build one dashboard from a public dataset',sql:'Design and query a small database',ml:'Ship one small ML feature',git:'Put your work on GitHub with commits',api:'Build and document one REST API',research:'Write a 2-page literature review',writing:'Publish 3 short articles',pm:'Lead one small team or volunteer project',comm:'Give one talk or presentation'};
 function hiddenFlag(title,query){const q=norm(query).toLowerCase();return !!q&&!title.toLowerCase().split(/[^a-z]+/).some(w=>w.length>3&&q.includes(w))}
 function analyze(text,opts,opps){const o=opts||{},p=parseCV(text),roles=roleScan(p).map(r=>({...r,hidden:hiddenFlag(r.title,o.query)}));
-const all=opps.map(op=>({op,e:evalOpp(op,p,o)})).filter(({op,e})=>op.status!=='closed'&&(e.cov>=.34||!(op.required||[]).length));
+const rw=new Set([...roles.flatMap(r=>r.title.toLowerCase().split(/[^a-z]+/)),...Object.keys(p.sk).flatMap(k=>SK[k][0].toLowerCase().split(/[^a-z]+/))].filter(w=>w.length>=4&&!/^(with|and|for|the|other|tools|skills)$/.test(w)));
+const titleHit=t=>String(t).toLowerCase().split(/[^a-z]+/).some(w=>rw.has(w));
+const all=opps.map(op=>({op,e:evalOpp(op,p,o)})).filter(({op,e})=>{if(op.status==='closed')return false;const n=(op.required||[]).length;return op.type==='job'?(e.cov>=.25||(!n&&titleHit(op.title))):(e.cov>=.34||!n)});
 all.sort((a,b)=>(a.e.hard-b.e.hard)||b.e.cov-a.e.cov);
-const matches=all.slice(0,40).map(({op,e})=>({id:op.id,type:op.type,title:op.title,org:op.org,url:op.url,source:op.source,status:op.status,last_checked:op.last_checked,deadline:op.deadline,location:op.location||null,match:e.status,label:e.label,coverage:Math.round(e.cov*100),rows:e.rows,hidden:hiddenFlag(op.title,o.query)}));
+const seen=new Set(),uniq=all.filter(({op})=>{if(op.type!=='job')return true;const k=(op.title+'|'+op.org).toLowerCase().replace(/\s+/g,' ');if(seen.has(k))return false;seen.add(k);return true});
+const picked=[...uniq.filter(x=>x.op.type!=='job').slice(0,60),...uniq.filter(x=>x.op.type==='job').slice(0,150)];
+const matches=picked.map(({op,e})=>({id:op.id,type:op.type,title:op.title,org:op.org,url:op.url,source:op.source,status:op.status,last_checked:op.last_checked,deadline:op.deadline,location:op.location||null,match:e.status,label:e.label,coverage:Math.round(e.cov*100),rows:e.rows,hidden:hiddenFlag(op.title,o.query)}));
 const miss={};roles.slice(0,5).forEach(r=>r.miss.forEach(k=>miss[k]=(miss[k]||0)+1));
 all.filter(x=>!x.e.hard).slice(0,20).forEach(({op})=>(op.required||[]).forEach(s=>{if(!Array.isArray(s)&&SK[s]&&!p.sk[s])miss[s]=(miss[s]||0)+1}));
 const gaps=Object.keys(miss).sort((a,b)=>miss[b]-miss[a]).slice(0,5).map(k=>({skill:SK[k][0],blocks:miss[k],next:(NEXT[k]||'Complete one small real project')+', then add one CV line with a measurable result.'}));
-return{profile:{skills:Object.keys(p.sk).map(k=>({id:k,label:SK[k][0],evidence:p.sk[k]})),degree:degLabel(p),degreeInProgress:false,yearsStated:p.yrs},roles:roles.map(r=>({title:r.title,coverage:Math.round(r.cov*100),have:r.hit.map(k=>SK[k][0]),missing:r.miss.map(k=>SK[k][0]),hidden:r.hidden})),matches,gaps}}
+return{profile:{skills:Object.keys(p.sk).map(k=>({id:k,label:SK[k][0],evidence:p.sk[k]})),degree:p.degProg?DEG[p.degProg]:p.deg?DEG[p.deg]:'not detected',degreeInProgress:p.degProg>0,yearsExperience:p.yrs},roles:roles.map(r=>({title:r.title,coverage:Math.round(r.cov*100),have:r.hit.map(k=>SK[k][0]),missing:r.miss.map(k=>SK[k][0]),hidden:r.hidden})),matches,gaps}}
 module.exports={degRow,degLabel,yrsText,skillCount,TECH,SK,ROLES,parseCV,skillsIn,evalOpp,roleScan,analyze,DEG};
