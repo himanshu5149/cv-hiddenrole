@@ -1,44 +1,340 @@
-<!DOCTYPE html><html lang="en">
-   <head>
-   
-   <meta charset="utf-8">
-      
-      <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-   
-   
-   <title>HiddenRole</title>
-   
-<style>
-:root{--bg:#f7f7f4;--card:#fff;--tx:#1b1b18;--mut:#66665f;--br:#e2e2da;--ac:#0f6b5c;--ok:#16794a;--wn:#a86a00;--no:#b3261e}
-@media(prefers-color-scheme:dark){:root{--bg:#141512;--card:#1e201c;--tx:#ecece6;--mut:#a3a39a;--br:#33362f;--ac:#4fc3ad;--ok:#5fd397;--wn:#f0b44c;--no:#ff8a80}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,sans-serif;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
-main{max-width:880px;margin:0 auto;padding:16px 16px 60px}nav{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-h1{font-size:clamp(28px,6vw,42px);line-height:1.1;margin:14px 0 6px}h2{font-size:19px;margin:26px 0 8px}
-input,textarea,select{width:100%;border:1px solid var(--br);background:var(--card);color:var(--tx);border-radius:10px;padding:10px;font:inherit}textarea{min-height:170px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}@media(max-width:560px){.row{grid-template-columns:1fr}}
-button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}button.g{background:none;color:var(--ac);border:1px solid var(--ac)}button.s{padding:5px 11px;font-size:14px}
-.card{background:var(--card);border:1px solid var(--br);border-radius:14px;padding:13px 15px;margin:9px 0}.t{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
-.m{color:var(--mut);font-size:14px}.ok{color:var(--ok)}.warn{color:var(--wn)}.fail,.not_eligible{color:var(--no)}.strong{color:var(--ok)}.possible,.stretch{color:var(--wn)}
-.chip{display:inline-block;border:1px solid var(--br);border-radius:99px;padding:2px 10px;margin:2px 4px 2px 0;font-size:13px}.hid{border-color:var(--ac);color:var(--ac);font-weight:600}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tabs button{background:none;color:var(--tx);border:1px solid var(--br)}.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-table{width:100%;border-collapse:collapse;font-size:14px}td{padding:5px;border-top:1px solid var(--br);vertical-align:top}.sc{overflow-x:auto}summary{cursor:pointer;color:var(--ac);font-size:14px}a{color:var(--ac)}
-.meter{height:7px;background:var(--br);border-radius:9px;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;background:var(--ac)}.err{color:var(--no)}[hidden]{display:none!important}
-.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
-</style></head><body><main>
-<nav><b>🔎 HiddenRole</b><span id="nav"></span></nav>
-<h1>You may be searching for the wrong jobs.</h1>
-<p class="m">Upload or paste your CV. Find roles, jobs, scholarships and programs you overlooked, with CV evidence for every match and honest gaps. No account needed to analyze.</p>
-<form id="f"><label class="m">CV file (PDF, DOCX, TXT; max 5 MB) or paste text below</label><input type="file" id="file" accept=".pdf,.docx,.txt">
-<textarea id="text" placeholder="…or paste your CV text here"></textarea>
-<div class="row"><input id="query" placeholder="What you search for today (optional)"><input id="country" placeholder="Your country (optional)"></div>
-<label class="m"><input type="checkbox" id="store" style="width:auto"> Save my CV text to my account for 30 days (login required)</label><br><br>
-<button id="go">Find my hidden opportunities</button> <span id="msg" class="err"></span></form>
-<div id="res" hidden><div class="tabs" id="tabs"></div><div id="view"></div></div>
-<h2>Career coach <span class="m">(no AI key needed)</span></h2>
-<div class="card"><p class="m">Uses the CV above. Optional: paste a job description for job-specific tools. It measures, asks questions and flags weak spots; it never writes claims you didn't make.</p>
-<textarea id="jd" style="min-height:110px" placeholder="Paste a job description (optional)"></textarea>
-<div style="margin-top:10px"><button id="cgo">Run career coach</button> <span id="cmsg" class="err"></span></div></div>
-<div id="cres" hidden><div class="tabs" id="ctabs"></div><div id="cview"></div></div>
-<h2 id="trh" hidden>My tracker</h2><div id="tr"></div>
-<p class="m">Privacy: analysis runs on this server only; nothing is sent to third parties. Anonymous CVs are not stored. Program requirements are simplified: always confirm on the official site.</p>
-</main><script src="/main.js"></script><script src="/coach.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="yi8VAzYVPxsnVTZCoJuRlg9Iaq6lCrLENZkKT_Tq1HQ" />
+
+  <title>HiddenRole</title>
+
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --card: #fff;
+      --tx: #1b1b18;
+      --mut: #66665f;
+      --br: #e2e2da;
+      --ac: #0f6b5c;
+      --ok: #16794a;
+      --wn: #a86a00;
+      --no: #b3261e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #141512;
+        --card: #1e201c;
+        --tx: #ecece6;
+        --mut: #a3a39a;
+        --br: #33362f;
+        --ac: #4fc3ad;
+        --ok: #5fd397;
+        --wn: #f0b44c;
+        --no: #ff8a80;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--tx);
+      font: 16px/1.5 system-ui, sans-serif;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 16px 16px 60px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      line-height: 1.1;
+      margin: 14px 0 6px;
+    }
+
+    h2 {
+      font-size: 19px;
+      margin: 26px 0 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--br);
+      background: var(--card);
+      color: var(--tx);
+      border-radius: 10px;
+      padding: 10px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 170px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    @media (max-width: 560px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    button {
+      background: var(--ac);
+      color: #fff;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button.g {
+      background: none;
+      color: var(--ac);
+      border: 1px solid var(--ac);
+    }
+
+    button.s {
+      padding: 5px 11px;
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 14px;
+      padding: 13px 15px;
+      margin: 9px 0;
+    }
+
+    .t {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+
+    .m {
+      color: var(--mut);
+      font-size: 14px;
+    }
+
+    .ok,
+    .strong {
+      color: var(--ok);
+    }
+
+    .warn,
+    .possible,
+    .stretch {
+      color: var(--wn);
+    }
+
+    .fail,
+    .not_eligible {
+      color: var(--no);
+    }
+
+    .chip {
+      display: inline-block;
+      border: 1px solid var(--br);
+      border-radius: 99px;
+      padding: 2px 10px;
+      margin: 2px 4px 2px 0;
+      font-size: 13px;
+    }
+
+    .hid {
+      border-color: var(--ac);
+      color: var(--ac);
+      font-weight: 600;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+
+    .tabs button {
+      background: none;
+      color: var(--tx);
+      border: 1px solid var(--br);
+    }
+
+    .tabs button.on {
+      background: var(--ac);
+      color: #fff;
+      border-color: var(--ac);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 5px;
+      border-top: 1px solid var(--br);
+      vertical-align: top;
+    }
+
+    .sc {
+      overflow-x: auto;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--ac);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--ac);
+    }
+
+    .meter {
+      height: 7px;
+      background: var(--br);
+      border-radius: 9px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+
+    .meter i {
+      display: block;
+      height: 100%;
+      background: var(--ac);
+    }
+
+    .err {
+      color: var(--no);
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav>
+      <b>🔎 HiddenRole</b>
+      <span id="nav"></span>
+    </nav>
+
+    <h1>You may be searching for the wrong jobs.</h1>
+
+    <p class="m">
+      Upload or paste your CV. Find roles, jobs, scholarships and programs
+      you overlooked, with CV evidence for every match and honest gaps.
+      No account needed to analyze.
+    </p>
+
+    <form id="f">
+      <label class="m">
+        CV file (PDF, DOCX, TXT; max 5 MB) or paste text below
+      </label>
+
+      <input type="file" id="file" accept=".pdf,.docx,.txt">
+
+      <textarea id="text" placeholder="…or paste your CV text here"></textarea>
+
+      <div class="row">
+        <input id="query" placeholder="What you search for today (optional)">
+        <input id="country" placeholder="Your country (optional)">
+      </div>
+
+      <label class="m">
+        <input type="checkbox" id="store" style="width:auto">
+        Save my CV text to my account for 30 days (login required)
+      </label>
+
+      <br><br>
+
+      <button id="go">Find my hidden opportunities</button>
+      <span id="msg" class="err"></span>
+    </form>
+
+    <div id="res" hidden>
+      <div class="tabs" id="tabs"></div>
+      <div id="view"></div>
+    </div>
+
+    <h2>Career coach <span class="m">(no AI key needed)</span></h2>
+
+    <div class="card">
+      <p class="m">
+        Uses the CV above. Optional: paste a job description for
+        job-specific tools. It measures, asks questions and flags weak spots;
+        it never writes claims you didn't make.
+      </p>
+
+      <textarea
+        id="jd"
+        style="min-height:110px"
+        placeholder="Paste a job description (optional)"
+      ></textarea>
+
+      <div style="margin-top:10px">
+        <button id="cgo">Run career coach</button>
+        <span id="cmsg" class="err"></span>
+      </div>
+    </div>
+
+    <div id="cres" hidden>
+      <div class="tabs" id="ctabs"></div>
+      <div id="cview"></div>
+    </div>
+
+    <h2 id="trh" hidden>My tracker</h2>
+    <div id="tr"></div>
+
+    <p class="m">
+      Privacy: analysis runs on this server only; nothing is sent to third
+      parties. Anonymous CVs are not stored. Program requirements are
+      simplified: always confirm on the official site.
+    </p>
+  </main>
+
+  <script src="/main.js"></script>
+  <script src="/coach.js"></script>
+</body>
+</html>
